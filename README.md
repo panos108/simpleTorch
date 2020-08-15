@@ -1,0 +1,2 @@
+# Training_ANN_with_Pytorch
+ This repo aims to train neural networks with pytorch. The data are normalized insede the class. The validation is performed automatically. The output model gets the unscaled data and returns the output unscaled (The scaling is performed inside). This way the user do not interact the scaling,; however the user can select to not use the default scaling and scale the data before the training
