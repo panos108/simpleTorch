@@ -135,12 +135,10 @@ class train_ann:
 
     def plot_loss(self, losses, show=True):
         ax = plt.axes()
-        ax.set_xlabel("Iteration")
         ax.set_ylabel("Loss")
         x_loss = list(range(len(losses)))
         plt.plot(x_loss, losses)
         plt.xlabel('Epoch')
-        plt.ylabel('Loss')
         if show:
             plt.show()
 

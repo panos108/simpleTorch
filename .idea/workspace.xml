@@ -13,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_ann.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="142" column="24" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
+            <state relative-caret-position="166">
+              <caret line="141" selection-start-line="141" selection-end-line="141" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -200,8 +200,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/train_ann.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="142" column="24" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
+        <state relative-caret-position="166">
+          <caret line="141" selection-start-line="141" selection-end-line="141" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
