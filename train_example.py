@@ -1,6 +1,6 @@
 import numpy as np
 from train_ann import *
-
+from neural_net import *
 x_m = 1000  # number of samples
 x = np.random.default_rng().uniform(-5, 5, x_m)
 y = np.random.default_rng().uniform(-5, 5, x_m)
@@ -15,7 +15,7 @@ if f.ndim==1:
     F = F.reshape(-1, 1)
 
 model = Model(X.shape[1],F.shape[1])
-ANN = train_ann(model, X, F, learning_rate=1e-3, plot=False)
+ANN = train_ann(model, X, F)
 
 
 ys = ANN.predict(X)
