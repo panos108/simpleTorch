@@ -139,7 +139,8 @@ class train_ann:
         ax.set_ylabel("Loss")
         x_loss = list(range(len(losses)))
         plt.plot(x_loss, losses)
-
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
         if show:
             plt.show()
 
