@@ -15,7 +15,7 @@ if f.ndim==1:
     F = F.reshape(-1, 1)
 
 model = Model(X.shape[1],F.shape[1])
-ANN = train_ann(model, X, F)
+ANN = train_ann(model, X, F,plot=True)
 
 
 ys = ANN.predict(X)

@@ -125,10 +125,10 @@ class train_ann:
         for e in range(self.epoch):
             for X, F in loader:
                 loss = self.train_batch(X, F)
-                losses.append(loss)
                 batch_index += 1
                 if self.print_val:
                     print("Epoch: ", e + 1, " Batches: ", batch_index, " Loss: ", loss)
+            losses.append(loss)
 
         self.losses_train = losses
         return losses
