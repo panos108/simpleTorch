@@ -11,17 +11,18 @@ Foobar is a Python library for dealing with word pluralization.
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
 ```bash
-pip install foobar
+pip install -i https://test.pypi.org/simple/ simpleTorch
 ```
 
 ## Usage
-
+A more detailed example in example_of_usage.ipynb
 ```python
-import foobar
+# X array with inputs in np
+# F labels in np
+# model is the neural net written in pytorch
+import simpleTorch.train_ann
+train_ann(model, X, F,plot=True)
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
 ```
 
 ## Contributing
