@@ -11,8 +11,6 @@ train_example.py
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
-dist/simpleTorch-0.0.1-py3-none-any.whl
-dist/simpleTorch-0.0.1.tar.gz
 env/pyvenv.cfg
 env/Lib/site-packages/easy_install.py
 env/Lib/site-packages/Training_easy_pytorch/__init__.py
@@ -867,12 +865,16 @@ env/Lib/site-packages/setuptools/command/__pycache__/upload.cpython-37.pyc
 env/Lib/site-packages/setuptools/command/__pycache__/upload_docs.cpython-37.pyc
 env/Lib/site-packages/setuptools/extern/__init__.py
 env/Lib/site-packages/setuptools/extern/__pycache__/__init__.cpython-37.pyc
+env/Lib/site-packages/simpleTorch/__init__.py
+env/Lib/site-packages/simpleTorch/train_ann.py
 env/Lib/site-packages/simpleTorch-0.0.1.dist-info/INSTALLER
 env/Lib/site-packages/simpleTorch-0.0.1.dist-info/LICENSE
 env/Lib/site-packages/simpleTorch-0.0.1.dist-info/METADATA
 env/Lib/site-packages/simpleTorch-0.0.1.dist-info/RECORD
 env/Lib/site-packages/simpleTorch-0.0.1.dist-info/WHEEL
 env/Lib/site-packages/simpleTorch-0.0.1.dist-info/top_level.txt
+env/Lib/site-packages/simpleTorch/__pycache__/__init__.cpython-37.pyc
+env/Lib/site-packages/simpleTorch/__pycache__/train_ann.cpython-37.pyc
 env/Scripts/Activate.ps1
 env/Scripts/activate
 env/Scripts/activate.bat
