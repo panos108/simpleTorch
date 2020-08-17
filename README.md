@@ -6,7 +6,7 @@ This repo aims to train neural networks with pytorch simple. The data are normal
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
 
 ```bash
-pip install -i https://test.pypi.org/simple/ simpleTorch
+pip install simpleTorch
 ```
 
 ## Usage
