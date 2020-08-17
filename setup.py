@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="simpleTorch", # Replace with your own username
-    version="0.0.1",
+    version="0.0.2",
     author="Panos Petsagkourakis",
     author_email="p.petsagkourakis@ucl.ac.uk",
     description="This package is built on pytorch to avoid some standard steps",
