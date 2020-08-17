@@ -10,7 +10,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train_ann.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="146">
@@ -19,6 +19,18 @@
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Training_easy_pytorch/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Training_easy_pytorch/train_ann.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-120" />
           </provider>
         </entry>
       </file>
@@ -55,6 +67,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>plo</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -85,6 +102,17 @@
               <item name="Training_ANN_with_Pytorch" type="b2602c69:ProjectViewProjectNode" />
               <item name="Training_ANN_with_Pytorch" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Training_ANN_with_Pytorch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Training_ANN_with_Pytorch" type="462c0819:PsiDirectoryNode" />
+              <item name="Training_easy_pytorch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Training_ANN_with_Pytorch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Training_ANN_with_Pytorch" type="462c0819:PsiDirectoryNode" />
+              <item name="Training_easy_pytorch" type="462c0819:PsiDirectoryNode" />
+              <item name="train_ann.py" type="8704e2dd:PyFileNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -94,6 +122,11 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/train_example.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Panos\OneDrive - University College London\Documents\GitHub\Training_ANN_with_Pytorch\Training_easy_pytorch" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -145,10 +178,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
@@ -157,7 +189,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39893618" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39893618" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -206,6 +238,14 @@
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Training_easy_pytorch/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Training_easy_pytorch/train_ann.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-120" />
       </provider>
     </entry>
   </component>
