@@ -32,7 +32,8 @@ class train_ann:
 
     def __init__(self, model, X, F, optimizer=None, loss_fn=None,
                  learning_rate=1e-3, print_val=True, epoch=200, batch_size=68,
-                 validation_set=0.33, auto_normalize=True, plot=False):
+                 validation_set=0.33, auto_normalize=True, normalize_x= (-1, 1),
+                 normalize_y = (-1,1), l2_reg=0., plot=False):
         """
         Initialize the training of the ann
         :param model:            This is the ann import from outside
@@ -52,15 +53,25 @@ class train_ann:
         :type batch_size:        Integer
         :param validation_set:   This is the number of data that are used for validation
         :type validation_set:    Double
+        :param normalize_x:      This is a tuple contains the min-max that the data inputs are normalized.
+                                 default: min=-1, max=1
+        :type normalize_x:       Tuple
+        :param normalize_y:      This is a tuple contains the min-max that the data labels are normalized.
+                                 default: min=-1, max=1
+        :type normalize_y:       Tuple
+        :param l2_reg:           This is the parameter for the L2 regularization
+        :type l2_reg:            Positive float number (Default =0., no regularization)
         :param plot:             If this value is true then it plots the loss
         :type  plot:             Boolean
         """
         self.epoch          = epoch
         self.batch_size     = batch_size
         self.plot           = plot
-        self.scale_x        = MinMaxScaler(feature_range=(-1,1))
-        self.scale_f        = MinMaxScaler(feature_range=(-1,1))
+
+        self.scale_x        = MinMaxScaler(feature_range=(normalize_x[0],normalize_x[1]))
+        self.scale_f        = MinMaxScaler(feature_range=(normalize_y[0],normalize_y[1]))
         self.auto_normalize = auto_normalize
+        self.l2_regulization= l2_reg
         if self.auto_normalize:
             X_scale = self.scale_x.fit_transform(X)
             F_scale = self.scale_f.fit_transform(F)
@@ -103,6 +114,12 @@ class train_ann:
         F_predict = self.model(X)          # Forward propagation
 
         loss = self.loss_fn(F_predict, F)  # loss calculation
+        # Add the L2 normalization
+        lambdas = self.l2_regulization
+        l2_reg = torch.tensor(0.)
+        for param in self.model.parameters():
+            l2_reg += torch.norm(param)
+        loss += lambdas *l2_reg
 
         self.optimizer.zero_grad()         # all grads of variables are set to 0 before backward calculation
 
