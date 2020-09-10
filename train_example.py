@@ -1,8 +1,8 @@
 import numpy as np
-from train_ann import *
+#from train_ann import *
 from neural_net import *
 
-#from simpleTorch.train_ann import *
+from simpleTorch.train_ann import *
 x_m = 1000  # number of samples
 x = np.random.default_rng().uniform(-5, 5, x_m)
 y = np.random.default_rng().uniform(-5, 5, x_m)
