@@ -10,20 +10,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/train_ann.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+            <state relative-caret-position="488">
+              <caret line="209" column="41" selection-start-line="209" selection-start-column="41" selection-end-line="209" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simpleTorch/train_ann.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="221" column="41" lean-forward="true" selection-start-line="221" selection-start-column="41" selection-end-line="221" selection-end-column="41" />
+            <state relative-caret-position="188">
+              <caret line="76" column="16" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -83,6 +86,9 @@
       <find>l2_reg</find>
       <find>from</find>
       <find>valida</find>
+      <find>cva</find>
+      <find>conca</find>
+      <find>np.c</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,10 +99,10 @@
       <list>
         <option value="$PROJECT_DIR$/neural_net.py" />
         <option value="$PROJECT_DIR$/set_up.py" />
-        <option value="$PROJECT_DIR$/train_ann.py" />
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/train_example.py" />
         <option value="$PROJECT_DIR$/simpleTorch/train_ann.py" />
+        <option value="$PROJECT_DIR$/train_ann.py" />
       </list>
     </option>
   </component>
@@ -117,6 +123,11 @@
             <path>
               <item name="Training_ANN_with_Pytorch" type="b2602c69:ProjectViewProjectNode" />
               <item name="Training_ANN_with_Pytorch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Training_ANN_with_Pytorch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Training_ANN_with_Pytorch" type="462c0819:PsiDirectoryNode" />
+              <item name="simpleTorch" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -240,13 +251,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train_ann.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../Leeds_working_space - ss - Exp - BO/Plots.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -295,8 +299,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/simpleTorch/train_ann.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="221" column="41" lean-forward="true" selection-start-line="221" selection-start-column="41" selection-end-line="221" selection-end-column="41" />
+        <state relative-caret-position="188">
+          <caret line="76" column="16" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train_ann.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="209" column="41" selection-start-line="209" selection-start-column="41" selection-end-line="209" selection-end-column="41" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
