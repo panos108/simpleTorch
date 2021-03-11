@@ -211,7 +211,7 @@ class train_ann:
 
             batch_index += 1
         self.losses_val = losses
-        F_predict_vector = np.cvaoncatenate(F_predict_vectors)
+        F_predict_vector = np.concatinate(F_predict_vectors)
         return F_predict_vector
 
     def predict(self, x):
