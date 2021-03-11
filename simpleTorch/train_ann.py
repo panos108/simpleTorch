@@ -80,7 +80,11 @@ class train_ann:
             F_scale = F
 
         #Split the set to train and test (validation)
-        self.X_train, self.X_test, self.F_train, self.F_test = \
+        if validation_set ==0.0:
+            self.X_train, self.X_test, self.F_train, self.F_test =\
+                X_scale,X_scale, F_scale, F_scale
+        else:
+            self.X_train, self.X_test, self.F_train, self.F_test = \
             train_test_split(X_scale, F_scale, test_size=validation_set, random_state=0)
 
         if optimizer == None:
@@ -207,7 +211,7 @@ class train_ann:
 
             batch_index += 1
         self.losses_val = losses
-        F_predict_vector = np.concatenate(F_predict_vectors)
+        F_predict_vector = np.cvaoncatenate(F_predict_vectors)
         return F_predict_vector
 
     def predict(self, x):
