@@ -111,7 +111,7 @@ class train_ann:
         :return:  Loss of this batch
         :rtype:   float64
         """
-        F_predict = self.model(X)          # Forward propagation
+        F_predict = self.model(minX)          # Forward propagation
 
         loss = self.loss_fn(F_predict, F)  # loss calculation
         # Add the L2 normalization
