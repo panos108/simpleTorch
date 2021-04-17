@@ -33,7 +33,7 @@ class train_ann:
     def __init__(self, model, X, F, optimizer=None, loss_fn=None,
                  learning_rate=1e-3, print_val=True, epoch=200, batch_size=68,
                  validation_set=0.33, auto_normalize=True, normalize_x= (-1, 1),
-                 normalize_y = (-1,1), l2_reg=0., plot=False):
+                 normalize_y = (-1,1), l2_reg=0., plot=False, swag =False):
         """
         Initialize the training of the ann
         :param model:            This is the ann import from outside
@@ -64,6 +64,7 @@ class train_ann:
         :param plot:             If this value is true then it plots the loss
         :type  plot:             Boolean
         """
+
         self.epoch          = epoch
         self.batch_size     = batch_size
         self.plot           = plot
@@ -100,6 +101,9 @@ class train_ann:
 
         # Run the training
         self.run()
+        if swag:
+            self.weights_mean, self.bias_mean, self.var_w, self.var_b = self.perform_swag_train(25)
+
 
     def train_batch(self, X, F):
         """
@@ -111,7 +115,7 @@ class train_ann:
         :return:  Loss of this batch
         :rtype:   float64
         """
-        F_predict = self.model(minX)          # Forward propagation
+        F_predict = self.model(X)          # Forward propagation
 
         loss = self.loss_fn(F_predict, F)  # loss calculation
         # Add the L2 normalization
@@ -233,4 +237,142 @@ class train_ann:
             y = y_scale
         return y
 
+    def extract_weights(self,swag=False):
+        w = []
+        b = []
+        w2 = []
+        b2 = []
+        k = 0
+        model = self.model
+        for param in model.parameters():
+            if np.mod(k, 2) == 0:
+                w += [param.data.numpy()]
+                if swag:
+                    w2 += [param.data.numpy()**2]
+            else:
+                b += [param.data.numpy()]
+                if swag:
+                    b2 += [param.data.numpy()**2]
+            k += 1
+        if swag:
+            return w, w2, b, b2
+        else:
+            return w, b
 
+
+    def perform_swag_train(self, T):
+
+
+        batch_size_train = self.batch_size
+        dataset_train = self.dataset_train
+        dataset_test  = self.dataset_test
+        data_loader_train = DataLoader(dataset=dataset_train, batch_size=batch_size_train, shuffle=True)
+        data_loader_test = DataLoader(dataset=dataset_test, batch_size=len(dataset_test), shuffle=True)
+        weights_mean, weights_sq, bias_mean, bias_sq2 = self.extract_weights(swag=True)
+        initial_model = self.model
+        self.initial_model = initial_model
+        # Train and get the resulting loss per iteration
+        weights = []
+        bias    = []
+        self.epoch = 5
+        n = 0
+        for i in range(T):
+            n +=1
+            loss = self.train(loader=data_loader_train)
+            weights_new, weights_new2, bias_new, bias_new2 = self.extract_weights(swag=True)
+            weights += [weights_new]
+            bias    += [bias_new]
+
+            update_mean_sq = self.compute_mean_std_w_b_recursive(weights_new, bias_new, weights_mean,
+                                                weights_sq, bias_mean,
+                                                bias_sq2, n)
+            weights_mean, weights_sq, bias_mean, bias_sq2 = update_mean_sq
+        var_w, var_b = self.compute_variance (weights_mean, weights_sq, bias_mean, bias_sq2)
+
+        return weights_mean, bias_mean, var_w, var_b
+
+    def compute_mean_std_w_b_recursive(self, w, b, w_mean, w_sq, b_mean, b_sq, n):
+
+        for i in range(len(w)):
+            w_mean[i] = (n*w_mean[i] + w[i])/(n+1)
+            b_mean[i] = (n*b_mean[i] + b[i])/(n+1)
+            w_sq[i] = (n*w_sq[i] + w[i]**2)/(n+1)
+            b_sq[i] = (n*b_sq[i] + b[i]**2)/(n+1)
+
+        return  w_mean, w_sq, b_mean, b_sq
+
+    def compute_variance(self, w_mean, w_sq, b_mean, b_sq):
+        variance_w = [0]*len(w_mean)
+        variance_b = [0]*len(w_mean)
+
+        for i in range(len(w_mean)):
+            variance_w[i] = 1/2*(w_sq[i]-w_mean[i]**2)
+            variance_b[i] = 1/2*(b_sq[i]-b_mean[i]**2)
+            variance_w[i][variance_w[i] < 0] = 1e-8
+            variance_b[i][variance_b[i] < 0] = 1e-8
+
+        return variance_w, variance_b
+
+
+
+    def mc_model(self,w_mean, b_mean, var_w, var_b):
+
+        k = 0
+        k_w = 0
+        k_b = 0
+        model = self.model
+        for param in model.parameters():
+            if np.mod(k, 2) == 0:
+                r, c = w_mean[k_w].shape
+                w_n = np.random.multivariate_normal(w_mean[k_w].reshape(-1,), np.diag(var_w[k_w].reshape(-1,)))
+                w_n = w_n.reshape((r,c))
+                k_w +=1
+                with torch.no_grad():
+                    param.copy_(torch.Tensor(w_n))
+            else:
+                r = b_mean[k_b].shape
+
+                b_n = np.random.multivariate_normal(b_mean[k_b].reshape(-1,), np.diag(var_b[k_b].reshape(-1,)))
+                b_n = b_n
+
+                k_b +=1
+                with torch.no_grad():
+
+                    param.copy_(torch.Tensor(b_n))
+            k += 1
+
+
+    def predict_swag(self, x, S=10):
+        """
+        This function performs the predictions after the training
+        :param x: Input (feature) that we want to perform prediction with
+        :type x:  numpy array vector
+        :return:  Prediction of the value
+        :rtype:   numpy array vector
+        """
+        #Perfom the prediciton for the trained ANN with normalization or without it
+
+
+        if self.auto_normalize:
+            x_scale = self.scale_x.transform(x)
+        else:
+            x_scale = x
+        # Perform the prediction
+        x_scale = torch.from_numpy(np.array(x_scale)).float()
+
+        for i in range(S):
+            self.mc_model(self.weights_mean, self.bias_mean, self.var_w, self.var_b)
+            y_s = self.model(x_scale).detach().numpy()
+            if i ==0:
+                y_scale = np.zeros([y_s.shape[0],y_s.shape[1],S])
+            y_scale[:,:,i] = y_s
+        y = y_scale
+        for i in range(S):
+            if self.auto_normalize:
+                y[:,:,i] = self.scale_f.inverse_transform(y_scale[:,:,i])
+
+
+        y_mean = y.mean(-1)
+        y_std = y.std(-1)
+
+        return y_mean, y_std
