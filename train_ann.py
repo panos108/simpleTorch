@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
-
+import utilities
 import torch
 import torch.nn as nn
 from torch import optim
@@ -33,7 +33,7 @@ class train_ann:
     def __init__(self, model, X, F, optimizer=None, loss_fn=None,
                  learning_rate=1e-3, print_val=True, epoch=200, batch_size=68,
                  validation_set=0.33, auto_normalize=True, normalize_x= (-1, 1),
-                 normalize_y = (-1,1), l2_reg=0., plot=False, swag =False):
+                 normalize_y = (-1,1), l2_reg=0., plot=False, swag =False, probablistic_ann=False):
         """
         Initialize the training of the ann
         :param model:            This is the ann import from outside
@@ -73,6 +73,9 @@ class train_ann:
         self.scale_f        = MinMaxScaler(feature_range=(normalize_y[0],normalize_y[1]))
         self.auto_normalize = auto_normalize
         self.l2_regulization= l2_reg
+
+        self.probabilistic = probablistic_ann
+
         if self.auto_normalize:
             X_scale = self.scale_x.fit_transform(X)
             F_scale = self.scale_f.fit_transform(F)
@@ -88,10 +91,15 @@ class train_ann:
             self.optimizer = optim.Adam(model.parameters(), lr=learning_rate)
         else:
             self.optimizer = optimizer
-        if loss_fn   == None:
-            self.loss_fn = nn.MSELoss()
+        if  probablistic_ann:
+            self.loss_fn = utilities.NLL
         else:
-            self.loss_fn   = loss_fn
+            if loss_fn   == None:
+                self.loss_fn = nn.MSELoss()
+
+            else:
+                self.loss_fn   = loss_fn
+
 
         self.print_val     = print_val
         self.model         = model
@@ -116,8 +124,11 @@ class train_ann:
         :rtype:   float64
         """
         F_predict = self.model(X)          # Forward propagation
-
+        # if self.probabilistic:
+        #     loss = self.loss_fn(F_predict[0], F, F_predict[1])  # loss calculation
+        # else:
         loss = self.loss_fn(F_predict, F)  # loss calculation
+
         # Add the L2 normalization
         lambdas = self.l2_regulization
         l2_reg = torch.tensor(0.)
@@ -207,7 +218,10 @@ class train_ann:
             loss = self.loss_fn(F_predict, F).data.item() # loss calculation
             losses.append(loss)
             F_vectors.append(F.data.numpy())
-            F_predict_vectors.append(F_predict.data.numpy())
+            if self.probabilistic:
+                F_predict_vectors.append(F_predict[0].data.numpy())
+            else:
+                F_predict_vectors.append(F_predict.data.numpy())
 
             batch_index += 1
         self.losses_val = losses
