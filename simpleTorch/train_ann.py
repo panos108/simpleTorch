@@ -71,7 +71,13 @@ class train_ann:
         self.scale_x        = MinMaxScaler(feature_range=(normalize_x[0],normalize_x[1]))
         self.scale_f        = MinMaxScaler(feature_range=(normalize_y[0],normalize_y[1]))
         self.auto_normalize = auto_normalize
-        self.l2_regulization= l2_reg
+        self.l2_regulization= l2_reg#
+
+
+
+        self.normalize_x = normalize_x
+        self.normalize_y = normalize_y
+
         if self.auto_normalize:
             X_scale = self.scale_x.fit_transform(X)
             F_scale = self.scale_f.fit_transform(F)

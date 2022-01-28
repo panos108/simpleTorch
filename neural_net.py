@@ -47,10 +47,11 @@ class Model_probabilistic(nn.Module):
     def forward(self, state):
         m      = torch.nn.LeakyReLU(0.1)#0.01)
         relu   = torch.nn.ReLU()
+        sigmoid = torch.nn.Sigmoid()
         layer1 = m(self.layer1(state))
         layer2 =m(self.layer2(layer1))
         layer3 = m(self.layer3(layer2))
         action_mean = (self.action(layer3))
-        action_sts = relu(self.action_std(layer3))
+        action_sts = sigmoid(self.action_std(layer3))
 
         return action_mean, action_sts

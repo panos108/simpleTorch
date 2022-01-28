@@ -76,6 +76,13 @@ class train_ann:
 
         self.probabilistic = probablistic_ann
 
+
+
+        self.normalize_x = normalize_x
+        self.normalize_y = normalize_y
+
+
+
         if self.auto_normalize:
             X_scale = self.scale_x.fit_transform(X)
             F_scale = self.scale_f.fit_transform(F)
@@ -250,6 +257,40 @@ class train_ann:
         else:
             y = y_scale
         return y
+
+    def predict_probabilistic(self, x):
+        """
+        This function performs the predictions after the training
+        :param x: Input (feature) that we want to perform prediction with
+        :type x:  numpy array vector
+        :return:  Prediction of the value
+        :rtype:   numpy array vector
+        """
+        #Perfom the prediciton for the trained ANN with normalization or without it
+        if self.auto_normalize:
+            x_scale = self.scale_x.transform(x)
+        else:
+            x_scale = x
+
+
+
+        b_y = (self.scale_f.data_max_ - self.scale_f.data_min_)# / 2
+
+
+        # Perform the prediction
+        x_scale = torch.from_numpy(np.array(x_scale)).float()
+        y_scale = self.model(x_scale)[0].detach().numpy()
+        y_var   = self.model(x_scale)[1].detach().numpy()
+
+        if self.auto_normalize:
+            y   = self.scale_f.inverse_transform(y_scale)
+            var = (b_y)**2 * y_var * ((self.normalize_y[1]-self.normalize_y[0]) + self.normalize_y[0])**2
+
+        else:
+            y = y_scale, y_var
+        return y, var
+
+
 
     def extract_weights(self,swag=False):
         w = []
